@@ -5,25 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Word-Relay</title>
 </head>
+
 <body>
+  
   <h1>끝말잇기</h1>
   <div class="word-container">
     <strong>제시어 : </strong> <span class="word">거북이</span>
   </div>
   <div>
-    <input type="text" class="answer" placeholder="정답을 입력하세요"> 
-    <button>확인</button>
+    <form id="form">
+      <input type="text" class="answer" placeholder="정답을 입력하세요"> 
+      <button>확인</button>
+    </form>
   </div>
 
   <script>
-    let word = document.querySelector('.word');
+    const form = document.querySelector('#form');
+    const word = document.querySelector('.word');
     const input = document.querySelector('.answer');
-    const button = document.querySelector('button');
-    // console.log('정답은' + input.value);
 
-    button.addEventListener('click', () => {
-      let answer = input.value;
-      console.log(answer)
+    form.addEventListener('submit', (e) => {
+      let firstCharacter = input.value.slice(0, 1);
+      let lastCharacter = word.innerHTML.slice(-1);
+
+      e.preventDefault();
+
+      if (lastCharacter === firstCharacter) {
+        alert('딩동댕!');
+        word.innerHTML = input.value;
+        input.value = '';
+        console.log('last'+ lastCharacter, 'first'+firstCharacter);
+      } else {
+        alert('땡!');
+        input.value = '';
+        console.log('last'+ lastCharacter, 'first'+firstCharacter);
+      }
     });
 
   </script>
